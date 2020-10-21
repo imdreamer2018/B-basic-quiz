@@ -1,6 +1,8 @@
 package com.thoughtworks.basic.quiz.briefing.demo.controllerTests;
 
+import com.thoughtworks.basic.quiz.briefing.demo.dto.Education;
 import com.thoughtworks.basic.quiz.briefing.demo.dto.User;
+import com.thoughtworks.basic.quiz.briefing.demo.repository.EducationRepository;
 import com.thoughtworks.basic.quiz.briefing.demo.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,12 @@ public class UserControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EducationRepository educationRepository;
+
     private User user;
+
+    private Education education;
 
     @BeforeEach
     void setUp() {
@@ -37,6 +44,13 @@ public class UserControllerTest {
                 .age(18)
                 .avatar("https://inews.gtimg.com/newsapp_match/0/3581582328/0")
                 .description("description mock")
+                .build();
+        education = Education.builder()
+                .id(1)
+                .year(2020)
+                .title("mock education title")
+                .description("mock education description")
+                .userId(1)
                 .build();
     }
 
@@ -87,5 +101,14 @@ public class UserControllerTest {
         mockMvc.perform(post("/users/1/educations")
                 .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void should_return_educations_when_get_user_educations_success() throws Exception {
+        userRepository.save(user);
+        educationRepository.save(education);
+        mockMvc.perform(get("/users/1/educations"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].title", is("mock education title")));
     }
 }

@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
                 .timestamp(new Date())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .error("Bad Request")
-                .message(e.getMessage())
+                .message(Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage())
                 .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
     }

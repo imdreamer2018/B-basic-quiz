@@ -19,7 +19,7 @@ public class Education {
     @NotNull(message = "year can not empty")
     private long year;
     @NotEmpty(message = "title can not empty")
-    @CharSize(min = 1, max = 256, message = "title char size must be between 1 and 256 bytes")
+    @CharSize(min = 1, max = 10, message = "title char size must be between 1 and 256 bytes")
     private String title;
     @NotEmpty(message = "title can not empty")
     @CharSize(min = 1, max = 4096, message = "description char size must be between 1 and 256 bytes")

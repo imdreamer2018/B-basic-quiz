@@ -7,8 +7,11 @@ public class CharSizeValidator implements ConstraintValidator<CharSize, String> 
 
    private int maxCharSize;
 
+   private int minCharSize;
+
    public void initialize(CharSize charSize) {
       this.maxCharSize = charSize.max();
+      this.minCharSize = charSize.min();
    }
 
    @Override
@@ -19,7 +22,7 @@ public class CharSizeValidator implements ConstraintValidator<CharSize, String> 
 
       int f = StringValue.getBytes().length;
 
-      return f <= maxCharSize;
+      return f >= minCharSize && f <= maxCharSize;
 
    }
 }

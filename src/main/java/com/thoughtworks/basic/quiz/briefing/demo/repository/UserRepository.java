@@ -16,8 +16,8 @@ public class UserRepository {
         return maxUserId;
     }
 
-    public void setMaxStudentId(Long maxUserId) {
-        this.maxUserId = maxUserId;
+    public void setMaxStudentId() {
+        this.maxUserId++;
     }
 
     public void deleteAll() {

@@ -24,7 +24,7 @@ public class User {
     @NotNull(message = "age can not empty")
     @Min(value = 16, message = "age valued invalid, must greater than 16!")
     private long age;
-    @NotEmpty(message = "avatar can not empy")
+    @NotEmpty(message = "avatar can not empty")
     @CharSize(min = 8, max = 512, message = "avatar char size invalid, must between 8 and 512 bytes!")
     private String avatar;
     @CharSize(max = 1024, message = "description char size invalid, must between 0 and 1024 bytes!")

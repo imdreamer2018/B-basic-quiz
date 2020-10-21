@@ -11,6 +11,7 @@ public class CharSizeValidator implements ConstraintValidator<CharSize, String> 
       this.maxCharSize = charSize.max();
    }
 
+   @Override
    public boolean isValid(String StringValue, ConstraintValidatorContext context) {
       if(StringValue == null){
          return true;

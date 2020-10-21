@@ -66,4 +66,16 @@ public class UserControllerTest {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status", is(404)));
     }
+
+    @Test
+    void should_return_education_info_when_create_user_education_by_user_id_success() throws Exception {
+        userRepository.save(user);
+        String jsonValue =  "{\"year\":2020, " +
+                "\"title\":\"mock education title\", " +
+                "\"description\":\"mock education description\"}";
+        mockMvc.perform(post("/users/1/educations")
+                .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title", is("mock education title")));
+    }
 }

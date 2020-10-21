@@ -1,5 +1,6 @@
 package com.thoughtworks.basic.quiz.briefing.demo.controller;
 
+import com.thoughtworks.basic.quiz.briefing.demo.dto.Education;
 import com.thoughtworks.basic.quiz.briefing.demo.dto.User;
 import com.thoughtworks.basic.quiz.briefing.demo.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -26,5 +27,13 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
+    }
+
+    @PostMapping("/{id}/educations")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Education createUserEducation(
+            @PathVariable long id,
+            @RequestBody Education education) {
+        return userService.createEducation(id, education);
     }
 }

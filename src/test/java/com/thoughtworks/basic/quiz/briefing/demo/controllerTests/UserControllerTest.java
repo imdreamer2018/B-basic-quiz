@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,6 +32,7 @@ public class UserControllerTest {
     void setUp() {
         userRepository.deleteAll();
         user = User.builder()
+                .id(1)
                 .name("yangqian")
                 .age(18)
                 .avatar("https://inews.gtimg.com/newsapp_match/0/3581582328/0")
@@ -48,5 +50,20 @@ public class UserControllerTest {
                 .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name", is("yangqian")));
+    }
+
+    @Test
+    void should_return_user_info_when_get_user_by_id() throws Exception {
+        userRepository.save(user);
+        mockMvc.perform(get("/users/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("yangqian")));
+    }
+
+    @Test
+    void should_return_exception_when_get_user_by_id_not_found() throws Exception {
+        mockMvc.perform(get("/users/1"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status", is(404)));
     }
 }

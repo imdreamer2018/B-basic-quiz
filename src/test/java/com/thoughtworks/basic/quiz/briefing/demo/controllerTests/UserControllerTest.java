@@ -78,4 +78,14 @@ public class UserControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title", is("mock education title")));
     }
+
+    @Test
+    void should_return_exception_when_create_user_education_by_user_id_not_found() throws Exception {
+        String jsonValue =  "{\"year\":2020, " +
+                "\"title\":\"mock education title\", " +
+                "\"description\":\"mock education description\"}";
+        mockMvc.perform(post("/users/1/educations")
+                .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
 }

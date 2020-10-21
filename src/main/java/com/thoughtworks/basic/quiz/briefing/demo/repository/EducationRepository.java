@@ -1,10 +1,12 @@
 package com.thoughtworks.basic.quiz.briefing.demo.repository;
 
 import com.thoughtworks.basic.quiz.briefing.demo.dto.Education;
-import com.thoughtworks.basic.quiz.briefing.demo.dto.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class EducationRepository {

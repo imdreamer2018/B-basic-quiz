@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
 
+// TODO GTB-3: + 自定义了校验注解，非常不错
 @Documented
 @Constraint(validatedBy = CharSizeValidator.class)
 @Target({ METHOD, FIELD, ANNOTATION_TYPE})

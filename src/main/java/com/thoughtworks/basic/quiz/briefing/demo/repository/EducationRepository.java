@@ -20,6 +20,7 @@ public class EducationRepository {
     }
 
     public void setMaxEducationId() {
+        // TODO GTB-3: - ++操作线程不安全，可以了解下AtomicLong
         this.maxEducationId++;
     }
 
@@ -32,6 +33,7 @@ public class EducationRepository {
     }
 
     public List<Education> findByUserId(long userId) {
+        // TODO GTB-3: - 下面的代码可以使用Java8 Stream简化
         List<Education> educations = new ArrayList<>();
         for (Map.Entry<Long, Education> education: educationMap.entrySet()) {
             if (education.getValue().getUserId() == userId)

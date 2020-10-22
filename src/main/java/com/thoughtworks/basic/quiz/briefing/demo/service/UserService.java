@@ -23,6 +23,7 @@ public class UserService {
     }
 
     public User createUser(User userRequest) {
+        // TODO GTB-4: - 推荐把getMaxUserId()和setMaxStudentId()的逻辑放到一个方法
         userRequest.setId(userRepository.getMaxUserId());
         userRepository.setMaxStudentId();
         userRepository.save(userRequest);

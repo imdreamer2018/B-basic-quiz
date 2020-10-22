@@ -17,6 +17,7 @@ public class Education {
 
     private long id;
     @NotNull(message = "year can not empty")
+    // TODO GTB-1: - 没有对year的历年进行校验
     private long year;
     @NotEmpty(message = "title can not empty")
     @CharSize(min = 2, max = 256, message = "title char size must be between 1 and 256 bytes")

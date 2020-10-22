@@ -41,10 +41,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Error> handle(MethodArgumentNotValidException e) {
+        // TODO GTB-4: - 这块代码多处重复，推荐抽取
         Error errorResult = Error.builder()
                 .timestamp(new Date())
                 .status(HttpStatus.BAD_REQUEST.value())
+                // TODO GTB-3: - 了解下HttpStatus.BAD_REQUEST.getReasonPhrase()
                 .error("Bad Request")
+                // TODO GTB-4: + 有考虑到方法返回值为null的情况并进行了处理
                 .message(Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage())
                 .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);

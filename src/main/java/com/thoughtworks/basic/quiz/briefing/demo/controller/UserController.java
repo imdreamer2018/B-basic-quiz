@@ -30,8 +30,10 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    // TODO GTB-1: + 对id也进行了校验
     public User getUserById(
             @NotNull(message = "user id can not be null")
+            // TODO GTB-3: - 这里推荐使用@Min
             @DecimalMin(value = "1", message = "user id muse be number and greater than 1")
             @PathVariable Long id) {
         return userService.getUserById(id);

@@ -41,7 +41,6 @@ class UserServiceTest {
         initMocks(this);
         userService = new UserService(userRepository, educationRepository);
         user = User.builder()
-                .id(1)
                 .name("mock name")
                 .age(18)
                 .avatar("https://inews.gtimg.com/newsapp_match/0/3581582328/0")
@@ -49,11 +48,10 @@ class UserServiceTest {
                 .build();
 
         education = Education.builder()
-                .id(1)
                 .year(2020)
                 .title("mock education title")
                 .description("mock education description")
-                .userId(1)
+                .user(user)
                 .build();
 
     }

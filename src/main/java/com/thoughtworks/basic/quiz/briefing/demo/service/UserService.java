@@ -23,8 +23,6 @@ public class UserService {
     }
 
     public User createUser(User userRequest) {
-        userRequest.setId(userRepository.getMaxUserId());
-        userRepository.setMaxStudentId();
         userRepository.save(userRequest);
         return userRequest;
     }
@@ -39,9 +37,7 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(userId);
         User user = userOptional.orElseThrow(() -> new ResourceNotFoundException(
                 "can not find basic info of user with id is " + userId));
-        education.setId(educationRepository.getMaxEducationIdId());
-        education.setUserId(user.getId());
-        educationRepository.setMaxEducationId();
+        education.setUser(user);
         educationRepository.save(education);
         return education;
     }

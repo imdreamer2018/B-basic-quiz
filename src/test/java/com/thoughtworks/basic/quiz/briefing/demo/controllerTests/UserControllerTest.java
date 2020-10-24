@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTest {
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,20 +37,17 @@ public class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        userRepository.deleteAll();
         user = User.builder()
-                .id(1)
                 .name("yangqian")
                 .age(18)
                 .avatar("https://inews.gtimg.com/newsapp_match/0/3581582328/0")
                 .description("description mock")
                 .build();
         education = Education.builder()
-                .id(1)
                 .year(2020)
                 .title("mock education title")
                 .description("mock education description")
-                .userId(1)
+                .user(user)
                 .build();
     }
 
